@@ -51,6 +51,7 @@ const lastUrl = ref('')
 
 function createPublic(openPrint: boolean){
   const { slug } = saveQuote(store.input)
+  // eslint-disable-next-line no-undef
   lastUrl.value = `${window.location.origin}/q/${slug}`
   if(openPrint){
     router.push({ path: `/q/${slug}` })

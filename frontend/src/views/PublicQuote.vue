@@ -1,8 +1,8 @@
 <template>
-  <div class="page" v-if="record">
+  <div v-if="record" class="page">
     <div class="toolbar no-print">
       <button class="btn" @click="goHome">← Torna al wizard</button>
-      <button class="btn" @click="window.print()">Stampa / PDF</button>
+      <button class="btn" @click="printPage">Stampa / PDF</button>
       <span class="muted">Link pubblico: {{ publicUrl }}</span>
     </div>
 
@@ -94,11 +94,15 @@ const input = computed(() => (record.value?.input as QuoteInput) || {
 } as QuoteInput)
 const totals = computed(() => computeTotals(input.value))
 const createdAt = computed(() => record.value?.createdAt || '')
+// eslint-disable-next-line no-undef
 const publicUrl = window.location.href
 
 const issuer = { name: 'Tuo Nome / Studio', email: 'you@example.com' }
 
 function goHome(){ router.push('/') }
+
+// eslint-disable-next-line no-undef
+function printPage(){ window.print() }
 </script>
 <style scoped>
 .page { max-width: 900px; margin: 0 auto; padding: 16px; }

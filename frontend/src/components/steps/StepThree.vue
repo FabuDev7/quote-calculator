@@ -4,23 +4,23 @@
     <div class="grid grid-3">
       <div class="card">
         <strong>Urgenza</strong>
-        <label><input type="radio" name="urg" value="1" v-model.number="store.input.multipliers.urg"/> Nessuna</label>
-        <label><input type="radio" name="urg" value="1.2" v-model.number="store.input.multipliers.urg"/> < 72h</label>
-        <label><input type="radio" name="urg" value="1.3" v-model.number="store.input.multipliers.urg"/> < 48h</label>
-        <label><input type="radio" name="urg" value="1.5" v-model.number="store.input.multipliers.urg"/> Notte/Weekend</label>
+        <label><input v-model.number="store.input.multipliers.urg" type="radio" name="urg" value="1"/> Nessuna</label>
+        <label><input v-model.number="store.input.multipliers.urg" type="radio" name="urg" value="1.2"/> &lt; 72h</label>
+        <label><input v-model.number="store.input.multipliers.urg" type="radio" name="urg" value="1.3"/> &lt; 48h</label>
+        <label><input v-model.number="store.input.multipliers.urg" type="radio" name="urg" value="1.5"/> Notte/Weekend</label>
       </div>
       <div class="card">
         <strong>Complessità</strong>
-        <label><input type="radio" name="cplx" value="1" v-model.number="store.input.multipliers.cplx"/> Bassa</label>
-        <label><input type="radio" name="cplx" value="1.05" v-model.number="store.input.multipliers.cplx"/> Media-bassa</label>
-        <label><input type="radio" name="cplx" value="1.1" v-model.number="store.input.multipliers.cplx"/> Media</label>
-        <label><input type="radio" name="cplx" value="1.2" v-model.number="store.input.multipliers.cplx"/> Alta</label>
+        <label><input v-model.number="store.input.multipliers.cplx" type="radio" name="cplx" value="1"/> Bassa</label>
+        <label><input v-model.number="store.input.multipliers.cplx" type="radio" name="cplx" value="1.05"/> Media-bassa</label>
+        <label><input v-model.number="store.input.multipliers.cplx" type="radio" name="cplx" value="1.1"/> Media</label>
+        <label><input v-model.number="store.input.multipliers.cplx" type="radio" name="cplx" value="1.2"/> Alta</label>
       </div>
       <div class="card">
         <strong>Rischio/Usura</strong>
-        <label><input type="radio" name="risk" value="1" v-model.number="store.input.multipliers.risk"/> Nessuno</label>
-        <label><input type="radio" name="risk" value="1.05" v-model.number="store.input.multipliers.risk"/> Moderato</label>
-        <label><input type="radio" name="risk" value="1.15" v-model.number="store.input.multipliers.risk"/> Alto</label>
+        <label><input v-model.number="store.input.multipliers.risk" type="radio" name="risk" value="1"/> Nessuno</label>
+        <label><input v-model.number="store.input.multipliers.risk" type="radio" name="risk" value="1.05"/> Moderato</label>
+        <label><input v-model.number="store.input.multipliers.risk" type="radio" name="risk" value="1.15"/> Alto</label>
       </div>
     </div>
     <p>
