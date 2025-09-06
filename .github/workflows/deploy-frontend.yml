@@ -1,0 +1,53 @@
+name: deploy-frontend
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/deploy-frontend.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    # esegui tutti i comandi dentro la cartella frontend/
+    defaults:
+      run:
+        working-directory: frontend
+
+    # OIDC richiede questi permessi
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+          cache-dependency-path: 'frontend/package-lock.json'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Configura credenziali AWS via OIDC (no chiavi statiche)
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: eu-south-1
+
+      # Sincronizza la build su S3 (bucket privato origine CloudFront)
+      - name: Sync to S3
+        run: aws s3 sync dist/ s3://${{ vars.S3_BUCKET }}/ --delete
+
+      # Invalida la cache CloudFront per rendere attiva la nuova build
+      - name: Invalidate CloudFront
+        run: aws cloudfront create-invalidation --distribution-id ${{ vars.CF_DISTRIBUTION_ID }} --paths '/*'

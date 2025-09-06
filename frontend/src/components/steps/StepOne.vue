@@ -10,7 +10,7 @@
     <label>Modello tariffario
       <select v-model="store.input.model">
         <option value="HOURLY">Oraria</option>
-        <option value="DAY">Day rate</option>
+        <option value="DAY">Giornaliera</option>
         <option value="FORFAIT">Forfait</option>
       </select>
     </label>
