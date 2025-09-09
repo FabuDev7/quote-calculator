@@ -1,0 +1,14 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: backend
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,mappings
+  endpoint:
+    health:
+      probes:
+        enabled: true
