@@ -1,4 +1,7 @@
 name: backend-build-push
+concurrency:
+  group: backend-build-push-${{ github.ref }}
+  cancel-in-progress: true
 
 on:
   push:
