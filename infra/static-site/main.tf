@@ -1,38 +1,3 @@
-terraform {
-  required_version = ">= 1.6.0"
-  backend "s3" {
-    bucket         = "tf-state-quote-calculator-eu-south-1"
-    key            = "static-site/terraform.tfstate"
-    region         = "eu-south-1"
-    dynamodb_table = "tf-lock-quote-calculator"
-    encrypt        = true
-  }
-}
-
-provider "aws" {
-  region = var.region
-}
-
-# --- Variabili ---
-variable "region"  {
-  type = string
-  default = "eu-south-1"
-}
-variable "project" {
-  type = string
-  default = "quote-calculator"
-}
-variable "env"     {
-  type = string
-  default = "dev"
-}
-
-data "aws_caller_identity" "me" {}
-
-locals {
-  bucket_name = "${var.project}-${var.env}-frontend-${data.aws_caller_identity.me.account_id}"
-}
-
 # --- S3: bucket privato per i file buildati ---
 resource "aws_s3_bucket" "site" {
   bucket        = local.bucket_name
